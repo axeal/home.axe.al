@@ -1,0 +1,39 @@
+- name: Ensure hostname is set
+  ansible.builtin.hostname:
+    name: "{{ inventory_hostname }}"
+    use: systemd
+  become: true
+
+- name: Ensure directory /var/lib/node_exporter/textfile_collector exists
+  ansible.builtin.file:
+    path: /var/lib/node_exporter/textfile_collector
+    state: directory
+    mode: '0755'
+  become: true
+
+- name: Ensure libraspberrypi-bin is installed
+  ansible.builtin.apt:
+    name: libraspberrypi-bin
+    state: present
+  become: true
+
+- name: Ensure raspberrypi_exporter is installed
+  ansible.builtin.copy:
+    src: raspberrypi_exporter
+    dest: /usr/local/sbin/raspberrypi_exporter
+    mode: '0755'
+  become: true
+
+- name: Ensure raspberrypi_exporter.service systemd unit is installed
+  ansible.builtin.copy:
+    src: raspberrypi_exporter.service
+    dest: /etc/systemd/system/raspberrypi_exporter.service
+  become: true
+
+- name: Ensure raspberrypi_exporter.timer systemd unit is installed
+  ansible.builtin.copy:
+    src: raspberrypi_exporter.timer
+    dest: /etc/systemd/system/raspberrypi_exporter.timer
+  become: true
+  notify: Restart raspberrypi_exporter.timer
+

@@ -1,0 +1,6 @@
+- name: Restart raspberrypi_exporter.timer
+  ansible.builtin.systemd:
+    state: restarted
+    daemon_reload: yes
+    name: raspberrypi_exporter.timer
+  become: true
