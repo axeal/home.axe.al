@@ -4,4 +4,5 @@
     - variables.yaml
   roles:
     - role: common
-    - role: xanmanning.k3s
+    - role: k3s.orchestration.prereq
+    - role: k3s.orchestration.k3s_server
