@@ -1,0 +1,25 @@
+k3s_version: v1.33.3+k3s1
+api_endpoint: "{{ hostvars[groups['server'][0]]['ansible_host'] | default(groups['server'][0]) }}"
+server_config_yaml: |
+  etcd-expose-metrics: true
+  tls-san:
+    - "192.168.200.200"
+  flannel-backend: "none"
+  disable-network-policy: true
+  disable-cloud-controller: true
+  disable-kube-proxy: true
+  disable:
+    - "traefik"
+    - "servicelb"
+  embedded-registry: true
+  write-kubeconfig-group: "k3s"
+  write-kubeconfig-mode: "640"
+  supervisor-metrics: true
+extra_manifests:
+  - manifests/cilium.yaml
+  - manifests/flux.yaml
+  - manifests/prometheus-crds.yaml
+registries_config_yaml: |
+  # https://docs.k3s.io/installation/registry-mirror#enabling-registry-mirroring
+  mirrors:
+    "*":
