@@ -19,6 +19,8 @@ extra_manifests:
   - manifests/cilium.yaml
   - manifests/flux.yaml
   - manifests/prometheus-crds.yaml
+  - manifests/cert-manager-crds.yaml
+  - manifests/external-secrets-crds.yaml
 registries_config_yaml: |
   # https://docs.k3s.io/installation/registry-mirror#enabling-registry-mirroring
   mirrors:
