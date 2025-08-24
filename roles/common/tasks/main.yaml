@@ -37,3 +37,20 @@
   become: true
   notify: Restart raspberrypi_exporter.timer
 
+- name: Increase inotify watches
+  ansible.posix.sysctl:
+    name: fs.inotify.max_user_watches
+    value: "1048576"
+    state: present
+    sysctl_set: true
+    sysctl_file: /etc/sysctl.d/99-inotify.conf
+  become: true
+
+- name: Increase inotify max_user_instances
+  ansible.posix.sysctl:
+    name: fs.inotify.max_user_instances
+    value: "1024"
+    state: present
+    sysctl_set: true
+    sysctl_file: /etc/sysctl.d/99-inotify.conf
+  become: true
