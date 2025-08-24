@@ -4,10 +4,3 @@
     daemon_reload: yes
     name: raspberrypi_exporter.timer
   become: true
-
-- name: Install conntrack package
-  ansible.builtin.apt:
-    name: conntrack
-    state: present
-    update_cache: yes
-  become: true

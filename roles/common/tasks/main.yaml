@@ -54,3 +54,10 @@
     sysctl_set: true
     sysctl_file: /etc/sysctl.d/99-inotify.conf
   become: true
+
+- name: Install conntrack package
+  ansible.builtin.apt:
+    name: conntrack
+    state: present
+    update_cache: yes
+  become: true
