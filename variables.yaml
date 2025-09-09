@@ -12,6 +12,8 @@ server_config_yaml: |
     - "traefik"
     - "servicelb"
   embedded-registry: true
+  etcd-snapshot-retention: 30
+  etcd-snapshot-schedule-cron: "0 0 * * *"
   write-kubeconfig-group: "k3s"
   write-kubeconfig-mode: "640"
   supervisor-metrics: true
