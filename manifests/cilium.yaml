@@ -19,6 +19,8 @@ spec:
       dsrDispatch: opt
     k8sServiceHost: 127.0.0.1
     k8sServicePort: 6443
+    l2announcements:
+      enabled: true
     localRedirectPolicies:
       enabled: true
     hubble:
