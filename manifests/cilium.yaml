@@ -23,6 +23,14 @@ spec:
       enabled: true
     localRedirectPolicies:
       enabled: true
+    operator:
+      prometheus:
+        serviceMonitor:
+          enabled: true
+    prometheus:
+      enabled: true
+      serviceMonitor:
+        enabled: true
     hubble:
       relay:
         enabled: true
