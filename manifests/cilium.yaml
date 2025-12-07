@@ -12,7 +12,7 @@ spec:
   valuesContent: |-
     autoDirectNodeRoutes: true
     routingMode: native
-    ipv4NativeRoutingCIDR: 10.42.0.0/16
+    ipv4NativeRoutingCIDR: "10.0.0.0/8"
     kubeProxyReplacement: true
     loadBalancer:
       mode: dsr
