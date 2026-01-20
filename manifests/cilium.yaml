@@ -39,10 +39,9 @@ spec:
         ingress:
           enabled: true
           annotations:
-            kubernetes.io/ingress.class: nginx
+            kubernetes.io/ingress.class: traefik
             cert-manager.io/cluster-issuer: "letsencrypt-issuer"
-            nginx.ingress.kubernetes.io/auth-url: "http://oauth2-proxy.oauth2-proxy.svc.cluster.local/oauth2/auth"
-            nginx.ingress.kubernetes.io/auth-signin: "https://auth.axe.al/oauth2/start?rd=https://$host$escaped_request_uri"
+            traefik.ingress.kubernetes.io/router.middlewares: traefik-oauth2-proxy@kubernetescrd
             external-dns.alpha.kubernetes.io/target: 12406f4c-ecab-4674-a0ea-d4fb72f8f8e4.cfargotunnel.com
           hosts:
             - "hubble.axe.al"
