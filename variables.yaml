@@ -17,6 +17,7 @@ server_config_yaml: |
   write-kubeconfig-group: "k3s"
   write-kubeconfig-mode: "640"
   supervisor-metrics: true
+  enable-pprof: true
 extra_manifests:
   - manifests/cilium.yaml
   - manifests/flux.yaml
