@@ -4,7 +4,7 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.19.0
-    operator.prometheus.io/version: 0.86.0
+    operator.prometheus.io/version: 0.89.0
   name: alertmanagerconfigs.monitoring.coreos.com
 spec:
   group: monitoring.coreos.com
@@ -38,6 +38,7 @@ spec:
                       items:
                         type: string
                       type: array
+                      x-kubernetes-list-type: atomic
                     sourceMatch:
                       items:
                         properties:
@@ -59,6 +60,7 @@ spec:
                         - name
                         type: object
                       type: array
+                      x-kubernetes-list-type: atomic
                     targetMatch:
                       items:
                         properties:
@@ -80,8 +82,10 @@ spec:
                         - name
                         type: object
                       type: array
+                      x-kubernetes-list-type: atomic
                   type: object
                 type: array
+                x-kubernetes-list-type: atomic
               muteTimeIntervals:
                 items:
                   properties:
@@ -103,11 +107,13 @@ spec:
                                   type: integer
                               type: object
                             type: array
+                            x-kubernetes-list-type: atomic
                           months:
                             items:
                               pattern: ^((?i)january|february|march|april|may|june|july|august|september|october|november|december|1[0-2]|[1-9])(?:((:((?i)january|february|march|april|may|june|july|august|september|october|november|december|1[0-2]|[1-9]))$)|$)
                               type: string
                             type: array
+                            x-kubernetes-list-type: atomic
                           times:
                             items:
                               properties:
@@ -119,22 +125,27 @@ spec:
                                   type: string
                               type: object
                             type: array
+                            x-kubernetes-list-type: atomic
                           weekdays:
                             items:
                               pattern: ^((?i)sun|mon|tues|wednes|thurs|fri|satur)day(?:((:(sun|mon|tues|wednes|thurs|fri|satur)day)$)|$)
                               type: string
                             type: array
+                            x-kubernetes-list-type: atomic
                           years:
                             items:
                               pattern: ^2\d{3}(?::2\d{3}|$)
                               type: string
                             type: array
+                            x-kubernetes-list-type: atomic
                         type: object
                       type: array
+                      x-kubernetes-list-type: atomic
                   required:
                   - name
                   type: object
                 type: array
+                x-kubernetes-list-type: atomic
               receivers:
                 items:
                   properties:
@@ -536,10 +547,12 @@ spec:
                         - apiURL
                         type: object
                       type: array
+                      x-kubernetes-list-type: atomic
                     emailConfigs:
                       items:
                         properties:
                           authIdentity:
+                            minLength: 1
                             type: string
                           authPassword:
                             properties:
@@ -568,8 +581,10 @@ spec:
                             type: object
                             x-kubernetes-map-type: atomic
                           authUsername:
+                            minLength: 1
                             type: string
                           from:
+                            minLength: 1
                             type: string
                           headers:
                             items:
@@ -584,7 +599,9 @@ spec:
                               - value
                               type: object
                             type: array
+                            x-kubernetes-list-type: atomic
                           hello:
+                            minLength: 1
                             type: string
                           html:
                             type: string
@@ -593,8 +610,10 @@ spec:
                           sendResolved:
                             type: boolean
                           smarthost:
+                            minLength: 1
                             type: string
                           text:
+                            minLength: 1
                             type: string
                           tlsConfig:
                             properties:
@@ -689,9 +708,11 @@ spec:
                                 type: string
                             type: object
                           to:
+                            minLength: 1
                             type: string
                         type: object
                       type: array
+                      x-kubernetes-list-type: atomic
                     msteamsConfigs:
                       items:
                         properties:
@@ -1083,6 +1104,7 @@ spec:
                         - webhookUrl
                         type: object
                       type: array
+                      x-kubernetes-list-type: atomic
                     msteamsv2Configs:
                       items:
                         properties:
@@ -1472,6 +1494,7 @@ spec:
                             x-kubernetes-map-type: atomic
                         type: object
                       type: array
+                      x-kubernetes-list-type: atomic
                     name:
                       minLength: 1
                       type: string
@@ -1479,6 +1502,7 @@ spec:
                       items:
                         properties:
                           actions:
+                            minLength: 1
                             type: string
                           apiKey:
                             properties:
@@ -1494,8 +1518,10 @@ spec:
                             type: object
                             x-kubernetes-map-type: atomic
                           apiURL:
+                            pattern: ^https?://.+$
                             type: string
                           description:
+                            minLength: 1
                             type: string
                           details:
                             items:
@@ -1510,7 +1536,9 @@ spec:
                               - value
                               type: object
                             type: array
+                            x-kubernetes-list-type: atomic
                           entity:
+                            minLength: 1
                             type: string
                           httpConfig:
                             properties:
@@ -1876,17 +1904,22 @@ spec:
                                 type: object
                             type: object
                           message:
+                            minLength: 1
                             type: string
                           note:
+                            minLength: 1
                             type: string
                           priority:
+                            minLength: 1
                             type: string
                           responders:
                             items:
                               properties:
                                 id:
+                                  minLength: 1
                                   type: string
                                 name:
+                                  minLength: 1
                                   type: string
                                 type:
                                   enum:
@@ -1898,33 +1931,42 @@ spec:
                                   minLength: 1
                                   type: string
                                 username:
+                                  minLength: 1
                                   type: string
                               required:
                               - type
                               type: object
                             type: array
+                            x-kubernetes-list-type: atomic
                           sendResolved:
                             type: boolean
                           source:
+                            minLength: 1
                             type: string
                           tags:
+                            minLength: 1
                             type: string
                           updateAlerts:
                             type: boolean
                         type: object
                       type: array
+                      x-kubernetes-list-type: atomic
                     pagerdutyConfigs:
                       items:
                         properties:
                           class:
+                            minLength: 1
                             type: string
                           client:
+                            minLength: 1
                             type: string
                           clientURL:
                             type: string
                           component:
+                            minLength: 1
                             type: string
                           description:
+                            minLength: 1
                             type: string
                           details:
                             items:
@@ -1939,7 +1981,9 @@ spec:
                               - value
                               type: object
                             type: array
+                            x-kubernetes-list-type: atomic
                           group:
+                            minLength: 1
                             type: string
                           httpConfig:
                             properties:
@@ -2308,22 +2352,27 @@ spec:
                             items:
                               properties:
                                 alt:
+                                  minLength: 1
                                   type: string
                                 href:
                                   type: string
                                 src:
+                                  minLength: 1
                                   type: string
                               type: object
                             type: array
+                            x-kubernetes-list-type: atomic
                           pagerDutyLinkConfigs:
                             items:
                               properties:
                                 alt:
+                                  minLength: 1
                                   type: string
                                 href:
                                   type: string
                               type: object
                             type: array
+                            x-kubernetes-list-type: atomic
                           routingKey:
                             properties:
                               key:
@@ -2353,17 +2402,25 @@ spec:
                             type: object
                             x-kubernetes-map-type: atomic
                           severity:
+                            minLength: 1
                             type: string
                           source:
+                            minLength: 1
+                            type: string
+                          timeout:
+                            pattern: ^(0|(([0-9]+)y)?(([0-9]+)w)?(([0-9]+)d)?(([0-9]+)h)?(([0-9]+)m)?(([0-9]+)s)?(([0-9]+)ms)?)$
                             type: string
                           url:
+                            pattern: ^https?://.+$
                             type: string
                         type: object
                       type: array
+                      x-kubernetes-list-type: atomic
                     pushoverConfigs:
                       items:
                         properties:
                           device:
+                            minLength: 1
                             type: string
                           expire:
                             pattern: ^(([0-9]+)y)?(([0-9]+)w)?(([0-9]+)d)?(([0-9]+)h)?(([0-9]+)m)?(([0-9]+)s)?(([0-9]+)ms)?$
@@ -2734,8 +2791,12 @@ spec:
                                 type: object
                             type: object
                           message:
+                            minLength: 1
                             type: string
+                          monospace:
+                            type: boolean
                           priority:
+                            minLength: 1
                             type: string
                           retry:
                             pattern: ^(([0-9]+)y)?(([0-9]+)w)?(([0-9]+)d)?(([0-9]+)h)?(([0-9]+)m)?(([0-9]+)s)?(([0-9]+)ms)?$
@@ -2743,8 +2804,10 @@ spec:
                           sendResolved:
                             type: boolean
                           sound:
+                            minLength: 1
                             type: string
                           title:
+                            minLength: 1
                             type: string
                           token:
                             properties:
@@ -2760,6 +2823,7 @@ spec:
                             type: object
                             x-kubernetes-map-type: atomic
                           tokenFile:
+                            minLength: 1
                             type: string
                           ttl:
                             pattern: ^(0|(([0-9]+)y)?(([0-9]+)w)?(([0-9]+)d)?(([0-9]+)h)?(([0-9]+)m)?(([0-9]+)s)?(([0-9]+)ms)?)$
@@ -2767,6 +2831,7 @@ spec:
                           url:
                             type: string
                           urlTitle:
+                            minLength: 1
                             type: string
                           userKey:
                             properties:
@@ -2782,9 +2847,11 @@ spec:
                             type: object
                             x-kubernetes-map-type: atomic
                           userKeyFile:
+                            minLength: 1
                             type: string
                         type: object
                       type: array
+                      x-kubernetes-list-type: atomic
                     rocketchatConfigs:
                       items:
                         properties:
@@ -2798,11 +2865,11 @@ spec:
                                   minLength: 1
                                   type: string
                                 url:
-                                  pattern: ^https?://.+$
                                   type: string
                               type: object
                             minItems: 1
                             type: array
+                            x-kubernetes-list-type: atomic
                           apiURL:
                             pattern: ^https?://.+$
                             type: string
@@ -2829,6 +2896,7 @@ spec:
                               type: object
                             minItems: 1
                             type: array
+                            x-kubernetes-list-type: atomic
                           httpConfig:
                             properties:
                               authorization:
@@ -3193,10 +3261,8 @@ spec:
                                 type: object
                             type: object
                           iconURL:
-                            pattern: ^https?://.+$
                             type: string
                           imageURL:
-                            pattern: ^https?://.+$
                             type: string
                           linkNames:
                             type: boolean
@@ -3208,7 +3274,6 @@ spec:
                             minLength: 1
                             type: string
                           thumbURL:
-                            pattern: ^https?://.+$
                             type: string
                           title:
                             minLength: 1
@@ -3247,6 +3312,7 @@ spec:
                         - tokenID
                         type: object
                       type: array
+                      x-kubernetes-list-type: atomic
                     slackConfigs:
                       items:
                         properties:
@@ -3256,20 +3322,25 @@ spec:
                                 confirm:
                                   properties:
                                     dismissText:
+                                      minLength: 1
                                       type: string
                                     okText:
+                                      minLength: 1
                                       type: string
                                     text:
                                       minLength: 1
                                       type: string
                                     title:
+                                      minLength: 1
                                       type: string
                                   required:
                                   - text
                                   type: object
                                 name:
+                                  minLength: 1
                                   type: string
                                 style:
+                                  minLength: 1
                                   type: string
                                 text:
                                   minLength: 1
@@ -3280,12 +3351,15 @@ spec:
                                 url:
                                   type: string
                                 value:
+                                  minLength: 1
                                   type: string
                               required:
                               - text
                               - type
                               type: object
+                            minItems: 1
                             type: array
+                            x-kubernetes-list-type: atomic
                           apiURL:
                             properties:
                               key:
@@ -3300,12 +3374,16 @@ spec:
                             type: object
                             x-kubernetes-map-type: atomic
                           callbackId:
+                            minLength: 1
                             type: string
                           channel:
+                            minLength: 1
                             type: string
                           color:
+                            minLength: 1
                             type: string
                           fallback:
+                            minLength: 1
                             type: string
                           fields:
                             items:
@@ -3322,8 +3400,11 @@ spec:
                               - title
                               - value
                               type: object
+                            minItems: 1
                             type: array
+                            x-kubernetes-list-type: atomic
                           footer:
+                            minLength: 1
                             type: string
                           httpConfig:
                             properties:
@@ -3689,6 +3770,7 @@ spec:
                                 type: object
                             type: object
                           iconEmoji:
+                            minLength: 1
                             type: string
                           iconURL:
                             type: string
@@ -3698,26 +3780,37 @@ spec:
                             type: boolean
                           mrkdwnIn:
                             items:
+                              minLength: 1
                               type: string
+                            minItems: 1
                             type: array
+                            x-kubernetes-list-type: atomic
                           pretext:
+                            minLength: 1
                             type: string
                           sendResolved:
                             type: boolean
                           shortFields:
                             type: boolean
                           text:
+                            minLength: 1
                             type: string
                           thumbURL:
                             type: string
+                          timeout:
+                            pattern: ^(0|(([0-9]+)y)?(([0-9]+)w)?(([0-9]+)d)?(([0-9]+)h)?(([0-9]+)m)?(([0-9]+)s)?(([0-9]+)ms)?)$
+                            type: string
                           title:
+                            minLength: 1
                             type: string
                           titleLink:
                             type: string
                           username:
+                            minLength: 1
                             type: string
                         type: object
                       type: array
+                      x-kubernetes-list-type: atomic
                     snsConfigs:
                       items:
                         properties:
@@ -4091,8 +4184,10 @@ spec:
                                 type: object
                             type: object
                           message:
+                            minLength: 1
                             type: string
                           phoneNumber:
+                            minLength: 1
                             type: string
                           sendResolved:
                             type: boolean
@@ -4134,17 +4229,22 @@ spec:
                                 type: boolean
                             type: object
                           subject:
+                            minLength: 1
                             type: string
                           targetARN:
+                            minLength: 1
                             type: string
                           topicARN:
+                            minLength: 1
                             type: string
                         type: object
                       type: array
+                      x-kubernetes-list-type: atomic
                     telegramConfigs:
                       items:
                         properties:
                           apiURL:
+                            pattern: ^https?://.+$
                             type: string
                           botToken:
                             properties:
@@ -4546,6 +4646,7 @@ spec:
                         - chatID
                         type: object
                       type: array
+                      x-kubernetes-list-type: atomic
                     victoropsConfigs:
                       items:
                         properties:
@@ -4563,6 +4664,7 @@ spec:
                             type: object
                             x-kubernetes-map-type: atomic
                           apiUrl:
+                            pattern: ^https?://.+$
                             type: string
                           customFields:
                             items:
@@ -4577,7 +4679,9 @@ spec:
                               - value
                               type: object
                             type: array
+                            x-kubernetes-list-type: atomic
                           entityDisplayName:
+                            minLength: 1
                             type: string
                           httpConfig:
                             properties:
@@ -4943,17 +5047,24 @@ spec:
                                 type: object
                             type: object
                           messageType:
+                            minLength: 1
                             type: string
                           monitoringTool:
+                            minLength: 1
                             type: string
                           routingKey:
+                            minLength: 1
                             type: string
                           sendResolved:
                             type: boolean
                           stateMessage:
+                            minLength: 1
                             type: string
+                        required:
+                        - routingKey
                         type: object
                       type: array
+                      x-kubernetes-list-type: atomic
                     webexConfigs:
                       items:
                         properties:
@@ -5334,6 +5445,7 @@ spec:
                         - roomID
                         type: object
                       type: array
+                      x-kubernetes-list-type: atomic
                     webhookConfigs:
                       items:
                         properties:
@@ -5726,10 +5838,12 @@ spec:
                             x-kubernetes-map-type: atomic
                         type: object
                       type: array
+                      x-kubernetes-list-type: atomic
                     wechatConfigs:
                       items:
                         properties:
                           agentID:
+                            minLength: 1
                             type: string
                           apiSecret:
                             properties:
@@ -5745,8 +5859,10 @@ spec:
                             type: object
                             x-kubernetes-map-type: atomic
                           apiURL:
+                            pattern: ^https?://.+$
                             type: string
                           corpID:
+                            minLength: 1
                             type: string
                           httpConfig:
                             properties:
@@ -6112,38 +6228,53 @@ spec:
                                 type: object
                             type: object
                           message:
+                            minLength: 1
                             type: string
                           messageType:
+                            minLength: 1
                             type: string
                           sendResolved:
                             type: boolean
                           toParty:
+                            minLength: 1
                             type: string
                           toTag:
+                            minLength: 1
                             type: string
                           toUser:
+                            minLength: 1
                             type: string
                         type: object
                       type: array
+                      x-kubernetes-list-type: atomic
                   required:
                   - name
                   type: object
                 type: array
+                x-kubernetes-list-map-keys:
+                - name
+                x-kubernetes-list-type: map
               route:
                 properties:
                   activeTimeIntervals:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   continue:
                     type: boolean
                   groupBy:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   groupInterval:
+                    minLength: 1
+                    pattern: ^(0|(([0-9]+)y)?(([0-9]+)w)?(([0-9]+)d)?(([0-9]+)h)?(([0-9]+)m)?(([0-9]+)s)?(([0-9]+)ms)?)$
                     type: string
                   groupWait:
+                    minLength: 1
+                    pattern: ^(0|(([0-9]+)y)?(([0-9]+)w)?(([0-9]+)d)?(([0-9]+)h)?(([0-9]+)m)?(([0-9]+)s)?(([0-9]+)ms)?)$
                     type: string
                   matchers:
                     items:
@@ -6166,32 +6297,105 @@ spec:
                       - name
                       type: object
                     type: array
+                    x-kubernetes-list-type: atomic
                   muteTimeIntervals:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   receiver:
                     type: string
                   repeatInterval:
+                    minLength: 1
+                    pattern: ^(0|(([0-9]+)y)?(([0-9]+)w)?(([0-9]+)d)?(([0-9]+)h)?(([0-9]+)m)?(([0-9]+)s)?(([0-9]+)ms)?)$
                     type: string
                   routes:
                     items:
                       x-kubernetes-preserve-unknown-fields: true
                     type: array
+                    x-kubernetes-list-type: atomic
                 type: object
+            type: object
+          status:
+            properties:
+              bindings:
+                items:
+                  properties:
+                    conditions:
+                      items:
+                        properties:
+                          lastTransitionTime:
+                            format: date-time
+                            type: string
+                          message:
+                            type: string
+                          observedGeneration:
+                            format: int64
+                            type: integer
+                          reason:
+                            type: string
+                          status:
+                            minLength: 1
+                            type: string
+                          type:
+                            enum:
+                            - Accepted
+                            minLength: 1
+                            type: string
+                        required:
+                        - lastTransitionTime
+                        - status
+                        - type
+                        type: object
+                      type: array
+                      x-kubernetes-list-map-keys:
+                      - type
+                      x-kubernetes-list-type: map
+                    group:
+                      enum:
+                      - monitoring.coreos.com
+                      type: string
+                    name:
+                      minLength: 1
+                      type: string
+                    namespace:
+                      minLength: 1
+                      type: string
+                    resource:
+                      enum:
+                      - prometheuses
+                      - prometheusagents
+                      - thanosrulers
+                      - alertmanagers
+                      type: string
+                  required:
+                  - group
+                  - name
+                  - namespace
+                  - resource
+                  type: object
+                type: array
+                x-kubernetes-list-map-keys:
+                - group
+                - resource
+                - name
+                - namespace
+                x-kubernetes-list-type: map
             type: object
         required:
         - spec
         type: object
     served: true
     storage: true
+    subresources:
+      status: {}
 ---
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.19.0
-    operator.prometheus.io/version: 0.86.0
+    operator.prometheus.io/version: 0.89.0
   name: alertmanagers.monitoring.coreos.com
 spec:
   group: monitoring.coreos.com
@@ -8441,6 +8645,8 @@ spec:
                 x-kubernetes-list-map-keys:
                 - ip
                 x-kubernetes-list-type: map
+              hostNetwork:
+                type: boolean
               hostUsers:
                 type: boolean
               image:
@@ -9226,6 +9432,11 @@ spec:
                   whenScaled:
                     type: string
                 type: object
+              podManagementPolicy:
+                enum:
+                - OrderedReady
+                - Parallel
+                type: string
               podMetadata:
                 properties:
                   annotations:
@@ -9741,6 +9952,27 @@ spec:
                   - whenUnsatisfiable
                   type: object
                 type: array
+              updateStrategy:
+                properties:
+                  rollingUpdate:
+                    properties:
+                      maxUnavailable:
+                        anyOf:
+                        - type: integer
+                        - type: string
+                        x-kubernetes-int-or-string: true
+                    type: object
+                  type:
+                    enum:
+                    - OnDelete
+                    - RollingUpdate
+                    type: string
+                required:
+                - type
+                type: object
+                x-kubernetes-validations:
+                - message: rollingUpdate requires type to be RollingUpdate
+                  rule: '!(self.type != ''RollingUpdate'' && has(self.rollingUpdate))'
               version:
                 type: string
               volumeMounts:
@@ -10760,7 +10992,7 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.19.0
-    operator.prometheus.io/version: 0.86.0
+    operator.prometheus.io/version: 0.89.0
   name: podmonitors.monitoring.coreos.com
 spec:
   group: monitoring.coreos.com
@@ -11226,6 +11458,8 @@ spec:
                       enum:
                       - http
                       - https
+                      - HTTP
+                      - HTTPS
                       type: string
                     scrapeTimeout:
                       pattern: ^(0|(([0-9]+)y)?(([0-9]+)w)?(([0-9]+)d)?(([0-9]+)h)?(([0-9]+)m)?(([0-9]+)s)?(([0-9]+)ms)?)$
@@ -11342,6 +11576,8 @@ spec:
                 minLength: 1
                 type: string
               scrapeClassicHistograms:
+                type: boolean
+              scrapeNativeHistograms:
                 type: boolean
               scrapeProtocols:
                 items:
@@ -11470,7 +11706,7 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.19.0
-    operator.prometheus.io/version: 0.86.0
+    operator.prometheus.io/version: 0.89.0
   name: probes.monitoring.coreos.com
 spec:
   group: monitoring.coreos.com
@@ -11559,6 +11795,8 @@ spec:
                 x-kubernetes-map-type: atomic
               convertClassicHistogramsToNHCB:
                 type: boolean
+              enableHttp2:
+                type: boolean
               fallbackScrapeProtocol:
                 enum:
                 - PrometheusProto
@@ -11567,6 +11805,8 @@ spec:
                 - PrometheusText0.0.4
                 - PrometheusText1.0.0
                 type: string
+              followRedirects:
+                type: boolean
               interval:
                 pattern: ^(0|(([0-9]+)y)?(([0-9]+)w)?(([0-9]+)d)?(([0-9]+)h)?(([0-9]+)m)?(([0-9]+)s)?(([0-9]+)ms)?)$
                 type: string
@@ -11872,8 +12112,11 @@ spec:
                     enum:
                     - http
                     - https
+                    - HTTP
+                    - HTTPS
                     type: string
                   url:
+                    minLength: 1
                     type: string
                 required:
                 - url
@@ -11885,6 +12128,8 @@ spec:
                 minLength: 1
                 type: string
               scrapeClassicHistograms:
+                type: boolean
+              scrapeNativeHistograms:
                 type: boolean
               scrapeProtocols:
                 items:
@@ -12219,7 +12464,7 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.19.0
-    operator.prometheus.io/version: 0.86.0
+    operator.prometheus.io/version: 0.89.0
   name: prometheusagents.monitoring.coreos.com
 spec:
   group: monitoring.coreos.com
@@ -14623,6 +14868,11 @@ spec:
                   whenScaled:
                     type: string
                 type: object
+              podManagementPolicy:
+                enum:
+                - OrderedReady
+                - Parallel
+                type: string
               podMetadata:
                 properties:
                   annotations:
@@ -14790,9 +15040,8 @@ spec:
                         managedIdentity:
                           properties:
                             clientId:
+                              minLength: 1
                               type: string
-                          required:
-                          - clientId
                           type: object
                         oauth:
                           properties:
@@ -14821,11 +15070,26 @@ spec:
                           - clientSecret
                           - tenantId
                           type: object
+                        scope:
+                          pattern: ^[\w\s:/.\\-]+$
+                          type: string
                         sdk:
                           properties:
                             tenantId:
                               pattern: ^[0-9a-zA-Z-.]+$
                               type: string
+                          type: object
+                        workloadIdentity:
+                          properties:
+                            clientId:
+                              minLength: 1
+                              type: string
+                            tenantId:
+                              minLength: 1
+                              type: string
+                          required:
+                          - clientId
+                          - tenantId
                           type: object
                       type: object
                     basicAuth:
@@ -15672,6 +15936,8 @@ spec:
                 default: 30s
                 pattern: ^(0|(([0-9]+)y)?(([0-9]+)w)?(([0-9]+)d)?(([0-9]+)h)?(([0-9]+)m)?(([0-9]+)s)?(([0-9]+)ms)?)$
                 type: string
+              scrapeNativeHistograms:
+                type: boolean
               scrapeProtocols:
                 items:
                   enum:
@@ -16212,10 +16478,13 @@ spec:
                     enum:
                     - http
                     - grpc
+                    - HTTP
+                    - GRPC
                     type: string
                   compression:
                     enum:
                     - gzip
+                    - Gzip
                     type: string
                   endpoint:
                     minLength: 1
@@ -16342,6 +16611,27 @@ spec:
                     pattern: ^(0|(([0-9]+)y)?(([0-9]+)w)?(([0-9]+)d)?(([0-9]+)h)?(([0-9]+)m)?(([0-9]+)s)?(([0-9]+)ms)?)$
                     type: string
                 type: object
+              updateStrategy:
+                properties:
+                  rollingUpdate:
+                    properties:
+                      maxUnavailable:
+                        anyOf:
+                        - type: integer
+                        - type: string
+                        x-kubernetes-int-or-string: true
+                    type: object
+                  type:
+                    enum:
+                    - OnDelete
+                    - RollingUpdate
+                    type: string
+                required:
+                - type
+                type: object
+                x-kubernetes-validations:
+                - message: rollingUpdate requires type to be RollingUpdate
+                  rule: '!(self.type != ''RollingUpdate'' && has(self.rollingUpdate))'
               version:
                 type: string
               volumeMounts:
@@ -17312,6 +17602,16 @@ spec:
               rule: '!(has(self.mode) && self.mode == ''DaemonSet'' && has(self.scrapeConfigSelector))'
             - message: probeSelector cannot be set when mode is DaemonSet
               rule: '!(has(self.mode) && self.mode == ''DaemonSet'' && has(self.probeSelector))'
+            - message: scrapeConfigNamespaceSelector cannot be set when mode is DaemonSet
+              rule: '!(has(self.mode) && self.mode == ''DaemonSet'' && has(self.scrapeConfigNamespaceSelector))'
+            - message: probeNamespaceSelector cannot be set when mode is DaemonSet
+              rule: '!(has(self.mode) && self.mode == ''DaemonSet'' && has(self.probeNamespaceSelector))'
+            - message: serviceMonitorSelector cannot be set when mode is DaemonSet
+              rule: '!(has(self.mode) && self.mode == ''DaemonSet'' && has(self.serviceMonitorSelector))'
+            - message: serviceMonitorNamespaceSelector cannot be set when mode is DaemonSet
+              rule: '!(has(self.mode) && self.mode == ''DaemonSet'' && has(self.serviceMonitorNamespaceSelector))'
+            - message: additionalScrapeConfigs cannot be set when mode is DaemonSet
+              rule: '!(has(self.mode) && self.mode == ''DaemonSet'' && has(self.additionalScrapeConfigs))'
           status:
             properties:
               availableReplicas:
@@ -17407,7 +17707,7 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.19.0
-    operator.prometheus.io/version: 0.86.0
+    operator.prometheus.io/version: 0.89.0
   name: prometheuses.monitoring.coreos.com
 spec:
   group: monitoring.coreos.com
@@ -18065,6 +18365,7 @@ spec:
                         noProxy:
                           type: string
                         pathPrefix:
+                          minLength: 1
                           type: string
                         port:
                           anyOf:
@@ -18141,6 +18442,11 @@ spec:
                             type: object
                           type: array
                         scheme:
+                          enum:
+                          - http
+                          - https
+                          - HTTP
+                          - HTTPS
                           type: string
                         sigv4:
                           properties:
@@ -20191,6 +20497,11 @@ spec:
                   whenScaled:
                     type: string
                 type: object
+              podManagementPolicy:
+                enum:
+                - OrderedReady
+                - Parallel
+                type: string
               podMetadata:
                 properties:
                   annotations:
@@ -20768,9 +21079,8 @@ spec:
                         managedIdentity:
                           properties:
                             clientId:
+                              minLength: 1
                               type: string
-                          required:
-                          - clientId
                           type: object
                         oauth:
                           properties:
@@ -20799,11 +21109,26 @@ spec:
                           - clientSecret
                           - tenantId
                           type: object
+                        scope:
+                          pattern: ^[\w\s:/.\\-]+$
+                          type: string
                         sdk:
                           properties:
                             tenantId:
                               pattern: ^[0-9a-zA-Z-.]+$
                               type: string
+                          type: object
+                        workloadIdentity:
+                          properties:
+                            clientId:
+                              minLength: 1
+                              type: string
+                            tenantId:
+                              minLength: 1
+                              type: string
+                          required:
+                          - clientId
+                          - tenantId
                           type: object
                       type: object
                     basicAuth:
@@ -21723,6 +22048,8 @@ spec:
                 default: 30s
                 pattern: ^(0|(([0-9]+)y)?(([0-9]+)w)?(([0-9]+)d)?(([0-9]+)h)?(([0-9]+)m)?(([0-9]+)s)?(([0-9]+)ms)?)$
                 type: string
+              scrapeNativeHistograms:
+                type: boolean
               scrapeProtocols:
                 items:
                   enum:
@@ -22526,10 +22853,13 @@ spec:
                     enum:
                     - http
                     - grpc
+                    - HTTP
+                    - GRPC
                     type: string
                   compression:
                     enum:
                     - gzip
+                    - Gzip
                     type: string
                   endpoint:
                     minLength: 1
@@ -22656,6 +22986,27 @@ spec:
                     pattern: ^(0|(([0-9]+)y)?(([0-9]+)w)?(([0-9]+)d)?(([0-9]+)h)?(([0-9]+)m)?(([0-9]+)s)?(([0-9]+)ms)?)$
                     type: string
                 type: object
+              updateStrategy:
+                properties:
+                  rollingUpdate:
+                    properties:
+                      maxUnavailable:
+                        anyOf:
+                        - type: integer
+                        - type: string
+                        x-kubernetes-int-or-string: true
+                    type: object
+                  type:
+                    enum:
+                    - OnDelete
+                    - RollingUpdate
+                    type: string
+                required:
+                - type
+                type: object
+                x-kubernetes-validations:
+                - message: rollingUpdate requires type to be RollingUpdate
+                  rule: '!(self.type != ''RollingUpdate'' && has(self.rollingUpdate))'
               version:
                 type: string
               volumeMounts:
@@ -23708,7 +24059,7 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.19.0
-    operator.prometheus.io/version: 0.86.0
+    operator.prometheus.io/version: 0.89.0
   name: prometheusrules.monitoring.coreos.com
 spec:
   group: monitoring.coreos.com
@@ -23874,7 +24225,7 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.19.0
-    operator.prometheus.io/version: 0.86.0
+    operator.prometheus.io/version: 0.89.0
   name: scrapeconfigs.monitoring.coreos.com
 spec:
   group: monitoring.coreos.com
@@ -24342,6 +24693,9 @@ spec:
                     type: object
                     x-kubernetes-map-type: atomic
                 type: object
+              bodySizeLimit:
+                pattern: (^0|([0-9]*[.])?[0-9]+((K|M|G|T|E|P)i?)?B)$
+                type: string
               consulSDConfigs:
                 items:
                   properties:
@@ -24625,6 +24979,8 @@ spec:
                       type: string
                     scheme:
                       enum:
+                      - http
+                      - https
                       - HTTP
                       - HTTPS
                       type: string
@@ -30548,6 +30904,8 @@ spec:
                 type: array
               scheme:
                 enum:
+                - http
+                - https
                 - HTTP
                 - HTTPS
                 type: string
@@ -30559,6 +30917,8 @@ spec:
               scrapeInterval:
                 pattern: ^(0|(([0-9]+)y)?(([0-9]+)w)?(([0-9]+)d)?(([0-9]+)h)?(([0-9]+)m)?(([0-9]+)s)?(([0-9]+)ms)?)$
                 type: string
+              scrapeNativeHistograms:
+                type: boolean
               scrapeProtocols:
                 items:
                   enum:
@@ -30769,7 +31129,7 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.19.0
-    operator.prometheus.io/version: 0.86.0
+    operator.prometheus.io/version: 0.89.0
   name: servicemonitors.monitoring.coreos.com
 spec:
   group: monitoring.coreos.com
@@ -31192,6 +31552,8 @@ spec:
                       enum:
                       - http
                       - https
+                      - HTTP
+                      - HTTPS
                       type: string
                     scrapeTimeout:
                       pattern: ^(0|(([0-9]+)y)?(([0-9]+)w)?(([0-9]+)d)?(([0-9]+)h)?(([0-9]+)m)?(([0-9]+)s)?(([0-9]+)ms)?)$
@@ -31355,6 +31717,8 @@ spec:
                 type: string
               scrapeClassicHistograms:
                 type: boolean
+              scrapeNativeHistograms:
+                type: boolean
               scrapeProtocols:
                 items:
                   enum:
@@ -31492,7 +31856,7 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.19.0
-    operator.prometheus.io/version: 0.86.0
+    operator.prometheus.io/version: 0.89.0
   name: thanosrulers.monitoring.coreos.com
 spec:
   group: monitoring.coreos.com
@@ -33734,6 +34098,11 @@ spec:
                 type: string
               paused:
                 type: boolean
+              podManagementPolicy:
+                enum:
+                - OrderedReady
+                - Parallel
+                type: string
               podMetadata:
                 properties:
                   annotations:
@@ -33815,9 +34184,8 @@ spec:
                         managedIdentity:
                           properties:
                             clientId:
+                              minLength: 1
                               type: string
-                          required:
-                          - clientId
                           type: object
                         oauth:
                           properties:
@@ -33846,11 +34214,26 @@ spec:
                           - clientSecret
                           - tenantId
                           type: object
+                        scope:
+                          pattern: ^[\w\s:/.\\-]+$
+                          type: string
                         sdk:
                           properties:
                             tenantId:
                               pattern: ^[0-9a-zA-Z-.]+$
                               type: string
+                          type: object
+                        workloadIdentity:
+                          properties:
+                            clientId:
+                              minLength: 1
+                              type: string
+                            tenantId:
+                              minLength: 1
+                              type: string
+                          required:
+                          - clientId
+                          - tenantId
                           type: object
                       type: object
                     basicAuth:
@@ -34911,6 +35294,27 @@ spec:
                 x-kubernetes-map-type: atomic
               tracingConfigFile:
                 type: string
+              updateStrategy:
+                properties:
+                  rollingUpdate:
+                    properties:
+                      maxUnavailable:
+                        anyOf:
+                        - type: integer
+                        - type: string
+                        x-kubernetes-int-or-string: true
+                    type: object
+                  type:
+                    enum:
+                    - OnDelete
+                    - RollingUpdate
+                    type: string
+                required:
+                - type
+                type: object
+                x-kubernetes-validations:
+                - message: rollingUpdate requires type to be RollingUpdate
+                  rule: '!(self.type != ''RollingUpdate'' && has(self.rollingUpdate))'
               version:
                 type: string
               volumeMounts:
