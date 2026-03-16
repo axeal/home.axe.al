@@ -10,9 +10,14 @@ spec:
   chart: cilium
   repo: https://helm.cilium.io/
   valuesContent: |-
+    ipam:
+      mode: cluster-pool
+      operator:
+        clusterPoolIPv4MaskSize: 24
+        clusterPoolIPv4PodCIDRList: ["10.0.0.0/16"]
     autoDirectNodeRoutes: true
     routingMode: native
-    ipv4NativeRoutingCIDR: "10.0.0.0/8"
+    ipv4NativeRoutingCIDR: "10.0.0.0/16"
     kubeProxyReplacement: true
     loadBalancer:
       mode: dsr
