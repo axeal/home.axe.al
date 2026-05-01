@@ -4,9 +4,10 @@ metadata:
   namespace: kube-system
   name: cilium
 spec:
+  failurePolicy: abort
   bootstrap: true
   targetNamespace: kube-system
-  version: 1.19.1
+  version: 1.19.3
   chart: cilium
   repo: https://helm.cilium.io/
   valuesContent: |-
@@ -43,8 +44,8 @@ spec:
         enabled: true
         ingress:
           enabled: true
+          ingressClassName: traefik
           annotations:
-            kubernetes.io/ingress.class: traefik
             cert-manager.io/cluster-issuer: "letsencrypt-issuer"
             traefik.ingress.kubernetes.io/router.middlewares: traefik-oauth2-proxy@kubernetescrd
             external-dns.alpha.kubernetes.io/target: 12406f4c-ecab-4674-a0ea-d4fb72f8f8e4.cfargotunnel.com
